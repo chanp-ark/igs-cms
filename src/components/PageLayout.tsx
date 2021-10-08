@@ -1,6 +1,5 @@
 import React from "react";
 import { Page } from "../lib/types";
-import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
 interface Props {

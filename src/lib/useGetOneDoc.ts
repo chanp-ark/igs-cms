@@ -18,7 +18,7 @@ export const useGetOneDoc = (page: Page, postId: string) => {
       }
     }
     getDocs();
-  }, [postId]);
+  }, [page, postId]);
 
   return { loading, post };
 };

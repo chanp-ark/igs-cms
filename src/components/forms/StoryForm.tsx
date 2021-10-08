@@ -6,6 +6,7 @@ import {
   TextareaAutosize,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/dist/client/router";
 import React, { useState } from "react";
 import { Article, Story } from "../../lib/types";
 
@@ -14,6 +15,7 @@ interface StoryProps {
 }
 
 const StoryForm: React.FC<StoryProps> = ({ story }) => {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [images, setImages] = useState<any[]>([]);
 
@@ -66,6 +68,14 @@ const StoryForm: React.FC<StoryProps> = ({ story }) => {
         sx={{ marginTop: "3rem", marginLeft: "0.5rem" }}
       >
         Submit
+      </Button>
+      <Button
+        onClick={() => router.push(router.asPath.replace("/edit", ""))}
+        color="primary"
+        variant="contained"
+        sx={{ marginTop: "3rem", marginLeft: "0.5rem" }}
+      >
+        Cancel
       </Button>
     </form>
   );
