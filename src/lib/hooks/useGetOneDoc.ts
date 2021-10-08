@@ -1,7 +1,7 @@
 import { DocumentData } from "@firebase/firestore";
-import { useState, useEffect } from "react";
-import { getOneDoc } from "./posts";
-import { Page } from "./types";
+import { useEffect, useState } from "react";
+import { getOneDoc } from "../posts";
+import { Page } from "../types";
 
 export const useGetOneDoc = (page: Page, postId: string) => {
   const [loading, setLoading] = useState(true);

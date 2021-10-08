@@ -1,6 +1,6 @@
 import { useRouter } from "next/dist/client/router";
 import React from "react";
-import { useAuthContext } from "../lib/useAuthContext";
+import { useAuthContext } from "../lib/hooks/useAuthContext";
 
 const ProtectRoute: React.FC = ({ children }) => {
   const { user, loading } = useAuthContext();

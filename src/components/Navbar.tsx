@@ -2,7 +2,7 @@ import { Box, Button, capitalize, Tab, Tabs } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
 import { Page } from "../lib/types";
-import { useAuthContext } from "../lib/useAuthContext";
+import { useAuthContext } from "../lib/hooks/useAuthContext";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
       <Tabs
         textColor="secondary"
         indicatorColor="secondary"
-        value={currentPage === router.asPath.split("/")[1]}
+        value={router.asPath.split("/")[1]}
       >
         {pages.map((page) => (
           <Tab

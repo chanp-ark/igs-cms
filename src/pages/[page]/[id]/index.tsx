@@ -6,8 +6,8 @@ import React from "react";
 import PageLayout from "../../../components/PageLayout";
 import ArticleLayout from "../../../layout/ArticleLayout";
 import StoryLayout from "../../../layout/StoryLayout";
-import { Article as ArticleType, Page, Story } from "../../../lib/types";
-import { useGetOneDoc } from "../../../lib/useGetOneDoc";
+import { useGetOneDoc } from "../../../lib/hooks/useGetOneDoc";
+import { Article, Page, Story } from "../../../lib/types";
 
 const IndividualPage: NextPage = ({}) => {
   const router = useRouter();
@@ -19,16 +19,12 @@ const IndividualPage: NextPage = ({}) => {
     return <ErrorPage statusCode={404} />;
   }
 
-  if (!post) {
-    return null;
-  }
-
   const content = (() => {
     switch (page) {
       case Page.ARTICLES:
-        return <ArticleLayout article={post as ArticleType} />;
+        return <ArticleLayout article={post as Article} />;
       case Page.AUDIO:
-        return "TODO: Add AudioForm;";
+        return "TODO AudioLayout";
       case Page.STORIES:
         return <StoryLayout story={post as Story} />;
     }

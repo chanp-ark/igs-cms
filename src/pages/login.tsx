@@ -1,9 +1,9 @@
 import { Box, Button, Input, Typography } from "@mui/material";
-import Image from 'next/image';
+import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
 import Head from "next/head";
 import React, { useState } from "react";
-import { useAuthContext } from "../lib/useAuthContext";
+import { useAuthContext } from "../lib/hooks/useAuthContext";
 // import { useAlertContext } from "../utils/alertContext";
 
 const LoginForm: React.FC = () => {
@@ -32,7 +32,7 @@ const LoginForm: React.FC = () => {
       <Head>
         <title>Login</title>
       </Head>
-      <Box 
+      <Box
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -74,7 +74,7 @@ const LoginForm: React.FC = () => {
             display: "flex",
             flexDirection: "column",
             width: "250px",
-            margin: "1rem 0"
+            margin: "1rem 0",
           }}
         >
           <Input

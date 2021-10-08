@@ -1,8 +1,7 @@
 import { Button, MenuItem } from "@mui/material";
-import { DocumentData } from "firebase/firestore";
 import { useRouter } from "next/dist/client/router";
-import React, { useEffect, useState } from "react";
-import { getAllDocs } from "../lib/posts";
+import React from "react";
+import { useGetDocs } from "../lib/hooks/useGetDocs";
 import { Page } from "../lib/types";
 
 interface SidebarProps {
@@ -11,20 +10,8 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ page }) => {
   const router = useRouter();
+  const postList = useGetDocs(page);
   const postId = router.query.id;
-  const [postList, setPostList] = useState<DocumentData[]>([]);
-
-  useEffect(() => {
-    async function getDocs() {
-      try {
-        const docList = await getAllDocs(page);
-        setPostList(docList);
-      } catch (error) {
-        console.error("Failed to get all docs", (error as any).message);
-      }
-    }
-    getDocs();
-  }, [page]);
 
   const styling = {
     display: "block",
