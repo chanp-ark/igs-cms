@@ -7,6 +7,7 @@ import {
   TextareaAutosize,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/dist/client/router";
 import React, { useState } from "react";
 import { Article } from "../../lib/types";
 
@@ -15,6 +16,8 @@ interface ArticleProps {
 }
 
 const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
+  const router = useRouter();
+
   const [title, setTitle] = useState(article.title);
   const [subtitle, setSubtitle] = useState(article.subtitle);
   const [body, setBody] = useState(article.html);
@@ -116,14 +119,27 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
           </Typography>
         ) : null}
       </FormControl>
-      <Button
-        color="primary"
-        type="submit"
-        variant="contained"
-        sx={{ marginTop: "3rem", marginLeft: "0.5rem", width: '10%' }}
+
+      <Box
+        sx={{display: 'flex', width: '25%'}}
       >
-        Save
-      </Button>
+        <Button
+          color="primary"
+          type="submit"
+          variant="contained"
+          sx={{ marginTop: "3rem", marginLeft: "0.5rem", width: '10%' }}
+        >
+          Save
+        </Button>
+        <Button
+          onClick={() => router.push(router.asPath.replace("/edit", ""))}
+          color="secondary"
+          variant="contained"
+          sx={{ marginTop: "3rem", marginLeft: "1rem" }}
+        >
+          Cancel
+        </Button>
+      </Box>
     </form>
     </Box>
   );
