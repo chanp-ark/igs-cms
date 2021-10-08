@@ -1,10 +1,7 @@
 import {
   Box,
   Button,
-  FormControl,
-  Input,
-  InputLabel,
-  TextareaAutosize,
+  Divider,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -12,52 +9,70 @@ import React, { useEffect, useState } from "react";
 const Article = ({ article }) => {
   const [title, setTitle] = useState(article.title);
   const [subtitle, setSubtitle] = useState(article.subtitle);
-  const [body, setBody] = useState("");
-  const [image, setImage] = useState("");
-  const [duration, setDuration] = useState("");
+  const [body, setBody] = useState(article.html);
+  const [image, setImage] = useState(article.thumbnail);
+
+  console.log(body)
 
   const handleSubmit = () => {};
-  const submitButtonText = "Post";
 
   return (
-    <form style={{ width: "600px" }} onSubmit={handleSubmit}>
+    <Box
+      sx={{         
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        bgcolor: "background.paper",
+        overflow: "hidden",
+        borderRadius: "12px",
+        boxShadow: 1,
+        fontWeight: "bold",
+        margin: "1rem",
+        padding: "2rem 1rem",
+      }}
+    >
+    <form onSubmit={handleSubmit}>
       <Box sx={{display: 'flex'}}>
-        <Typography htmlFor={"title"} shrink={false}>
+        <Typography variant="h6" shrink={false}>
           Title
         </Typography>
         <Typography
           sx={{ width: "45%" }}
+          variant="body1"
         >
         {title}
         </Typography>
       </Box>
-      <Box>
-        {/* <FormControl classes={"input-field"}> */}
-        <Typography htmlFor={"subtitle"} shrink={false}>
+
+      <Divider />
+
+      <Box sx={{display: 'flex', alignItems: 'center'}}>        
+        <Typography variant="h6">
           Subtitle
         </Typography>
+
         <Typography
           sx={{ width: "45%" }}
+          variant="body1"
         >
         {subtitle}
         </Typography>
       </Box>
+      
+      <Divider />
 
-      <FormControl>
-        <InputLabel shrink={false} htmlFor={"subtitle"}>
+      <Box sx={{display: 'flex'}} >
+        <Typography variant="h6">
           Body
-        </InputLabel>
-        <TextareaAutosize
-          aria-label="body"
-          minRows={5}
-          name="body"
-          onChange={(e) => setBody(e.target.value)}
-          value={body}
-          style={{ width: "270px" }}
+        </Typography>
+        <Typography
+          sx={{ width: "45%" }}
         />
-      </FormControl>
+      </Box>
 
-      <FormControl
+      <Divider />
+
+      <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
@@ -65,30 +80,27 @@ const Article = ({ article }) => {
           margin: "auto",
         }}
       >
-        <InputLabel htmlFor="image" shrink={false}>
+        <Typography variant="h6">
           Image
-        </InputLabel>
-        <Input
-          name="image"
-          onChange={(e) => setImage(e.target.value)}
-          type="file"
-          sx={{ width: "45%" }}
-        />
+        </Typography>
+
         {image ? (
-          <Typography variant="subtitle2" sx={{ width: "300px" }}>
+          <Typography variant="body2">
             {image}
           </Typography>
         ) : null}
-      </FormControl>
+      </Box>
+
       <Button
-        color="primary"
+        color="secondary"
         type="submit"
         variant="contained"
         sx={{ marginTop: "3rem", marginLeft: "0.5rem" }}
       >
-        {submitButtonText}
+        Edit
       </Button>
     </form>
+    </Box>
   );
 };
 

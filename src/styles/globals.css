@@ -2,3 +2,19 @@ body {
   background-color: rgba(236, 236, 236, 0.5);
   margin: 0;
 }
+
+form {
+  width: 100%;
+}
+
+form .MuiBox-root{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+form .MuiTypography-body2 {
+  max-width: 60%;
+}
+
