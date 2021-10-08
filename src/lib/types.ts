@@ -12,13 +12,7 @@ export interface Article {
   image: string;
   duration: number;
 }
-
-export interface Greeting {
-  title: string;
-  greeting: string;
-}
-
-export interface Sound {
+export interface Audio {
   title: string;
   audio: string; // is this a url?
   duration: number; // number of seconds?

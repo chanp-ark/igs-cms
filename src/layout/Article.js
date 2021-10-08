@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   Input,
@@ -20,7 +21,7 @@ const Article = ({ article }) => {
 
   return (
     <form style={{ width: "600px" }} onSubmit={handleSubmit}>
-      <>
+      <Box sx={{display: 'flex'}}>
         <Typography htmlFor={"title"} shrink={false}>
           Title
         </Typography>
@@ -29,21 +30,18 @@ const Article = ({ article }) => {
         >
         {title}
         </Typography>
-      </>
-      <FormControl>
+      </Box>
+      <Box>
         {/* <FormControl classes={"input-field"}> */}
-        <InputLabel htmlFor={"subtitle"} shrink={false}>
+        <Typography htmlFor={"subtitle"} shrink={false}>
           Subtitle
-        </InputLabel>
-        <Input
-          name="subtitle"
-          onChange={(e) => setSubtitle(e.target.value)}
-          type="text"
-          placeholder="Subtitle"
-          value={title}
+        </Typography>
+        <Typography
           sx={{ width: "45%" }}
-        />
-      </FormControl>
+        >
+        {subtitle}
+        </Typography>
+      </Box>
 
       <FormControl>
         <InputLabel shrink={false} htmlFor={"subtitle"}>

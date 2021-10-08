@@ -7,13 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Article } from "../../lib/types";
+import { Article, Story } from "../../lib/types";
 
-interface ArticleProps {
-  article?: Article;
+interface StoryProps {
+  story?: Story;
 }
 
-const StoryForm: React.FC<ArticleProps> = ({ story }) => {
+const StoryForm: React.FC<StoryProps> = ({ story }) => {
   const [title, setTitle] = useState("");
   const [images, setImages] = useState<any[]>([]);
 

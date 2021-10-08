@@ -4,12 +4,14 @@ import { useRouter } from "next/dist/client/router";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
-import ArticleForm from "../../components/forms/ArticleForm";
-import PageLayout from "../../components/PageLayout";
-import { Article as ArticleType, Page } from "../../lib/types";
-import Article from '../../layout/Article'
+import ArticleForm from "../../../components/forms/ArticleForm";
+import PageLayout from "../../../components/PageLayout";
+import { Article as ArticleType, Story as StoryType, Page } from "../../../lib/types";
+import Article from '../../../layout/Article'
+import Story from '../../../layout/Story'
 
-import { useGetOneDoc } from "../../lib/useGetOneDoc";
+import { useGetOneDoc } from "../../../lib/useGetOneDoc";
+import StoryForm from "../../../components/forms/StoryForm";
 
 const IndividualPage: NextPage = ({}) => {
   const router = useRouter();
@@ -32,7 +34,8 @@ const IndividualPage: NextPage = ({}) => {
       case Page.AUDIO:
         return "TODO: Add AudioForm;";
       case Page.STORIES:
-        return "TODO: Add StoryForm;";
+        return "This is stories"
+      // return <Story story={post as StoryType} />
     }
   })();
 
