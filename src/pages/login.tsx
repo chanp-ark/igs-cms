@@ -1,4 +1,5 @@
 import { Box, Button, Input, Typography } from "@mui/material";
+import Image from 'next/image';
 import { useRouter } from "next/dist/client/router";
 import Head from "next/head";
 import React, { useState } from "react";
@@ -31,6 +32,24 @@ const LoginForm: React.FC = () => {
       <Head>
         <title>Login</title>
       </Head>
+      <Box 
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          overflow: "hidden",
+          fontWeight: "bold",
+          maxWidth: "400px",
+          margin: "auto",
+          marginTop: "20vh",
+        }}
+      >
+      {/* Can't get this image to load */}
+      {/* <Image src="/public/igs-icon.jpg" height={50} width={500} alt="isla grace sleep" /> */}
+      <Typography variant="h3" gutterBottom={true}>
+          Isla Grace Sleep
+      </Typography>
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -43,12 +62,15 @@ const LoginForm: React.FC = () => {
           fontWeight: "bold",
           maxWidth: "400px",
           margin: "auto",
-          marginTop: "20vh",
+          marginTop: "3rem",
           padding: "3rem 1rem",
         }}
       >
         <Typography variant="h4" gutterBottom={true}>
-          CMS Sign In
+          Welcome
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom={true}>
+          To Your Sleep Portal
         </Typography>
         <form
           onSubmit={handleSubmit}
@@ -56,6 +78,7 @@ const LoginForm: React.FC = () => {
             display: "flex",
             flexDirection: "column",
             width: "250px",
+            margin: "1rem 0"
           }}
         >
           <Input

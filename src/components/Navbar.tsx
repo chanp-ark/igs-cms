@@ -1,6 +1,6 @@
-import { Button, capitalize } from "@mui/material";
+import { AppBar, Box, Button, capitalize, IconButton, Toolbar, Typography, Tabs, Tab} from "@mui/material";
 import { useRouter } from "next/dist/client/router";
-import React from "react";
+import { useState } from "react";
 import { useAuthContext } from "../lib/useAuthContext";
 import { Page } from "../lib/types";
 
@@ -8,27 +8,38 @@ const Navbar: React.FC = () => {
   const router = useRouter();
   const { logout } = useAuthContext();
   const pages = Object.values(Page);
+  const [activeTab, setActiveTab] = useState('')
+
+  const handleClick = (selectedTab: string) => {
+    setActiveTab(selectedTab)
+    router.push(`/${selectedTab}`)
+  }
 
   return (
-    <div
+    <Box
       style={{
         background: "#eaaaaa",
         padding: "20px",
-        width: "100%",
+        flexGrow: 1,
+        display: 'flex',
+        justifyContent: 'space-between'
       }}
     >
-      {pages.map((page) => (
-        // <PageButton selected={location.pathname === page.route}>
-        //   <Link to={page.route}>{page.title}</Link>
-        // </PageButton>
-        <button key={page} onClick={() => router.push(`/${page}`)}>
-          {capitalize(page)}
-        </button>
-      ))}
+      <Tabs
+        textColor="secondary"
+        indicatorColor="secondary"
+        value={activeTab}
+      >
+        {pages.map((page) => {
+            return (
+              <Tab key={page} label={capitalize(page)} value={page} onClick={() => handleClick(page)} sx={{margin: '0 1rem'}}/>
+            );
+          })}
+      </Tabs>
       <Button onClick={logout} variant="contained">
-        Log Out
+          Log Out
       </Button>
-    </div>
+    </Box>
   );
 };
 
