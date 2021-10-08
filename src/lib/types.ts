@@ -1,8 +1,8 @@
 export enum Page {
   ARTICLES = "articles",
-  GREETINGS = "greetings",
-  SOUNDS = "sounds",
+  AUDIO = "audio",
   STORIES = "stories",
+  // LESSONS = "lessons",
 }
 
 export interface Article {

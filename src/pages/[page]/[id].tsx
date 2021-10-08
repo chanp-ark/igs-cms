@@ -6,7 +6,9 @@ import Head from "next/head";
 import React from "react";
 import ArticleForm from "../../components/forms/ArticleForm";
 import PageLayout from "../../components/PageLayout";
-import { Article, Page } from "../../lib/types";
+import { Article as ArticleType, Page } from "../../lib/types";
+import Article from '../../layout/Article'
+
 import { useGetOneDoc } from "../../lib/useGetOneDoc";
 
 const IndividualPage: NextPage = ({}) => {
@@ -19,13 +21,15 @@ const IndividualPage: NextPage = ({}) => {
     return <ErrorPage statusCode={404} />;
   }
 
+  if (!post) {
+    return null
+  }
+
   const content = (() => {
     switch (page) {
       case Page.ARTICLES:
-        return <ArticleForm article={post as Article} />;
-      case Page.GREETINGS:
-        return "TODO: Add GreetingForm";
-      case Page.SOUNDS:
+        return <Article article={post as ArticleType} />;
+      case Page.AUDIO:
         return "TODO: Add AudioForm;";
       case Page.STORIES:
         return "TODO: Add StoryForm;";
@@ -39,13 +43,8 @@ const IndividualPage: NextPage = ({}) => {
       </Head>
       <PageLayout page={page}>
         <div>
-          {content}
+          {post ? content : null}
           {!loading && !post && <h1>Not found</h1>}
-          {post && (
-            <pre style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
-              {JSON.stringify(post, null, 2)}
-            </pre>
-          )}
         </div>
       </PageLayout>
     </>

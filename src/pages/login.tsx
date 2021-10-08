@@ -44,11 +44,7 @@ const LoginForm: React.FC = () => {
           marginTop: "20vh",
         }}
       >
-      {/* Can't get this image to load */}
-      {/* <Image src="/public/igs-icon.jpg" height={50} width={500} alt="isla grace sleep" /> */}
-      <Typography variant="h3" gutterBottom={true}>
-          Isla Grace Sleep
-      </Typography>
+        <Image src="/igs.svg" height={50} width={500} alt="isla grace sleep" />
       </Box>
       <Box
         sx={{
