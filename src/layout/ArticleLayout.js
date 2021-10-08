@@ -11,11 +11,11 @@ import React, { useState } from "react";
 const ArticleLayout = ({ article }) => {
   const router = useRouter();
 
-  const [title, setTitle] = useState(article.title);
-  const [subtitle, setSubtitle] = useState(article.subtitle);
-  const [duration, setDuration] = useState(article.duration);
-  const [body, setBody] = useState(article.html);
-  const [image, setImage] = useState(article.thumbnail);
+  const [title] = useState(article.title);
+  const [subtitle] = useState(article.subtitle);
+  const [duration] = useState(article.duration);
+  const [body] = useState(article.html);
+  const [image] = useState(article.thumbnail);
 
   console.log(typeof body)
 
@@ -37,7 +37,7 @@ const ArticleLayout = ({ article }) => {
       }}
     >
     <div>
-      <Box sx={{display: 'flex'}}>
+      <Box>
         <Typography variant="h6" shrink={false}>
           Title
         </Typography>
@@ -51,7 +51,7 @@ const ArticleLayout = ({ article }) => {
 
       <Divider />
 
-      <Box sx={{display: 'flex', alignItems: 'center'}}>        
+      <Box>        
         <Typography variant="h6">
           Subtitle
         </Typography>
@@ -66,7 +66,7 @@ const ArticleLayout = ({ article }) => {
 
       <Divider />
 
-      <Box sx={{display: 'flex', alignItems: 'center'}}>        
+      <Box>        
         <Typography variant="h6">
           Duration
         </Typography>
@@ -81,7 +81,7 @@ const ArticleLayout = ({ article }) => {
       
       <Divider />
 
-      <Box sx={{display: 'flex'}} >
+      <Box >
         <Typography variant="h6">
           Body
         </Typography>
@@ -95,18 +95,10 @@ const ArticleLayout = ({ article }) => {
 
       <Divider />
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          margin: "auto",
-        }}
-      >
+      <Box>
         <Typography variant="h6">
           Image
         </Typography>
-
         {image ? (
           <Typography variant="body2">
             {image}

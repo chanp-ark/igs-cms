@@ -5,6 +5,8 @@ body {
 
 form {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .MuiBox-root .MuiBox-root{
@@ -18,16 +20,18 @@ form {
   max-width: 80%;
 }
 
-form .MuiBox-root{
+form .MuiFormControl-root{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
-form .MuiTypography-body2 {
-  max-width: 80%;
+form .MuiInput-root {
+  width: 50%;
+  margin-left: 18rem;
 }
+
 
 
 
