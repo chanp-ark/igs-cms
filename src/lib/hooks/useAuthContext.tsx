@@ -1,8 +1,8 @@
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useAlertContext } from "./alertContext";
-import { auth } from "./firebase";
+import { useAlertContext } from "../alertContext";
+import { auth } from "../firebase";
 
 export const useAuthContext = () => {
   const { setAlert } = useAlertContext();

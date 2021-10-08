@@ -8,20 +8,17 @@ export enum Page {
 export interface Article {
   title: string;
   subtitle: string;
+  duration: string;
   body: string;
   image: string;
-  duration: number;
 }
 export interface Audio {
   title: string;
-  audio: string; // is this a url?
-  duration: number; // number of seconds?
-  background: string;
+  image: string;
+  duration: string;
 }
 
 export interface Story {
   title: string;
   images: string[]; // array of url?
-  duration: number;
-  background: string;
 }

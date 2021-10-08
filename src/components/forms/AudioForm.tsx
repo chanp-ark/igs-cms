@@ -2,18 +2,16 @@ import {
   Button,
   FormControl,
   Input,
-  InputLabel,
-  TextareaAutosize,
-  Typography,
+  InputLabel
 } from "@mui/material";
 import React, { useState } from "react";
-import { Article, Audio, Story } from "../../lib/types";
+import { Audio } from "../../lib/types";
 
 interface AudioProps {
   audio?: Audio;
 }
 
-const AudioForm: React.FC<StoryProps> = ({ story }) => {
+const AudioForm: React.FC<AudioProps> = ({ audio }) => {
   const [title, setTitle] = useState("");
   const [images, setImages] = useState<any[]>([]);
 

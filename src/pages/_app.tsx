@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import ProtectRoute from "../components/ProtectRoute";
 import { AlertContextProvider } from "../lib/alertContext";
-import { useAuthContext } from "../lib/useAuthContext";
+import { useAuthContext } from "../lib/hooks/useAuthContext";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
