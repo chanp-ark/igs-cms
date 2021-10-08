@@ -7,6 +7,17 @@ form {
   width: 100%;
 }
 
+.MuiBox-root .MuiBox-root{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+.MuiBox-root .MuiTypography-body2 {
+  max-width: 80%;
+}
+
 form .MuiBox-root{
   display: flex;
   align-items: center;
@@ -15,6 +26,8 @@ form .MuiBox-root{
 }
 
 form .MuiTypography-body2 {
-  max-width: 60%;
+  max-width: 80%;
 }
+
+
 

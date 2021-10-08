@@ -3,9 +3,9 @@ import { useRouter } from "next/dist/client/router";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
+import ArticleForm from "../../../components/forms/ArticleForm";
 import StoryForm from "../../../components/forms/StoryForm";
 import PageLayout from "../../../components/PageLayout";
-import ArticleLayout from "../../../layout/Article";
 import { Article, Page, Story } from "../../../lib/types";
 import { useGetOneDoc } from "../../../lib/useGetOneDoc";
 
@@ -19,14 +19,10 @@ const EditPage: NextPage = ({}) => {
     return <ErrorPage statusCode={404} />;
   }
 
-  if (!post) {
-    return null;
-  }
-
   const content = (() => {
     switch (page) {
       case Page.ARTICLES:
-        return <ArticleLayout article={post as Article} />;
+        return <ArticleForm article={post as Article} />;
       case Page.AUDIO:
         return "TODO: Add AudioForm;";
       case Page.STORIES:
@@ -40,10 +36,8 @@ const EditPage: NextPage = ({}) => {
         <title>{post ? post.title : "Not found"}</title>
       </Head>
       <PageLayout page={page}>
-        <div>
-          {post ? content : null}
-          {!loading && !post && <h1>Not found</h1>}
-        </div>
+        {post ? content : null}
+        {!loading && !post && <h1>Not found</h1>}
       </PageLayout>
     </>
   );

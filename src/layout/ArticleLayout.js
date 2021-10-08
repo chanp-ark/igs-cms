@@ -4,15 +4,20 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/dist/client/router";
 
-const Article = ({ article }) => {
+import React, { useState } from "react";
+
+const ArticleLayout = ({ article }) => {
+  const router = useRouter();
+
   const [title, setTitle] = useState(article.title);
   const [subtitle, setSubtitle] = useState(article.subtitle);
+  const [duration, setDuration] = useState(article.duration);
   const [body, setBody] = useState(article.html);
   const [image, setImage] = useState(article.thumbnail);
 
-  console.log(body)
+  console.log(typeof body)
 
   const handleSubmit = () => {};
 
@@ -31,7 +36,7 @@ const Article = ({ article }) => {
         padding: "2rem 1rem",
       }}
     >
-    <form onSubmit={handleSubmit}>
+    <div>
       <Box sx={{display: 'flex'}}>
         <Typography variant="h6" shrink={false}>
           Title
@@ -58,6 +63,21 @@ const Article = ({ article }) => {
         {subtitle}
         </Typography>
       </Box>
+
+      <Divider />
+
+      <Box sx={{display: 'flex', alignItems: 'center'}}>        
+        <Typography variant="h6">
+          Duration
+        </Typography>
+
+        <Typography
+          sx={{ width: "45%" }}
+          variant="body1"
+        >
+        {duration}
+        </Typography>
+      </Box>
       
       <Divider />
 
@@ -67,7 +87,10 @@ const Article = ({ article }) => {
         </Typography>
         <Typography
           sx={{ width: "45%" }}
-        />
+          variant="body2"
+        >
+          <div dangerouslySetInnerHTML={{ __html: body}} />
+        </Typography>
       </Box>
 
       <Divider />
@@ -96,12 +119,13 @@ const Article = ({ article }) => {
         type="submit"
         variant="contained"
         sx={{ marginTop: "3rem", marginLeft: "0.5rem" }}
+        onClick={() => router.push(router.asPath + "/edit")}
       >
         Edit
       </Button>
-    </form>
+    </div>
     </Box>
   );
 };
 
-export default Article;
+export default ArticleLayout;

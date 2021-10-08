@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   Input,
@@ -10,21 +11,35 @@ import React, { useState } from "react";
 import { Article } from "../../lib/types";
 
 interface ArticleProps {
-  article?: Article;
+  article: Article;
 }
 
 const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
-  const [title, setTitle] = useState("");
-  const [subtitle, setSubtitle] = useState("");
-  const [body, setBody] = useState("");
-  const [image, setImage] = useState("");
-  const [duration, setDuration] = useState("");
+  const [title, setTitle] = useState(article.title);
+  const [subtitle, setSubtitle] = useState(article.subtitle);
+  const [body, setBody] = useState(article.html);
+  const [image, setImage] = useState(article.thumbnail);
+  const [duration, setDuration] = useState(article.duration);
 
   const handleSubmit = () => {};
   const submitButtonText = "Post";
 
   return (
-    <form style={{ width: "600px" }} onSubmit={handleSubmit}>
+    <Box
+      sx={{         
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        bgcolor: "background.paper",
+        overflow: "hidden",
+        borderRadius: "12px",
+        boxShadow: 1,
+        fontWeight: "bold",
+        margin: "1rem",
+        padding: "2rem 1rem",
+      }}
+    >
+      <form style={{ width: "600px" }} onSubmit={handleSubmit}>
       <FormControl>
         <InputLabel htmlFor={"title"} shrink={false}>
           Title
@@ -50,6 +65,20 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
           type="text"
           placeholder="Subtitle"
           value={title}
+          sx={{ width: "45%" }}
+        />
+      </FormControl>
+  
+      <FormControl>
+        <InputLabel htmlFor={"duration"} shrink={false}>
+          Duration
+        </InputLabel>
+        <Input
+          name="duration"
+          onChange={(e) => setDuration(e.target.value)}
+          type="text"
+          placeholder="ex: 3-4 minute read"
+          value={duration}
           sx={{ width: "45%" }}
         />
       </FormControl>
@@ -100,6 +129,7 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
         {submitButtonText}
       </Button>
     </form>
+    </Box>
   );
 };
 

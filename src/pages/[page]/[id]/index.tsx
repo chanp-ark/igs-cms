@@ -4,7 +4,7 @@ import ErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
 import PageLayout from "../../../components/PageLayout";
-import Article from "../../../layout/Article";
+import ArticleLayout from "../../../layout/ArticleLayout";
 import StoryLayout from "../../../layout/StoryLayout";
 import { Article as ArticleType, Page, Story } from "../../../lib/types";
 import { useGetOneDoc } from "../../../lib/useGetOneDoc";
@@ -26,7 +26,7 @@ const IndividualPage: NextPage = ({}) => {
   const content = (() => {
     switch (page) {
       case Page.ARTICLES:
-        return <Article article={post as ArticleType} />;
+        return <ArticleLayout article={post as ArticleType} />;
       case Page.AUDIO:
         return "TODO: Add AudioForm;";
       case Page.STORIES:
