@@ -1,17 +1,13 @@
-import { capitalize } from "@mui/material";
 import { NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
-import ArticleForm from "../../../components/forms/ArticleForm";
 import PageLayout from "../../../components/PageLayout";
-import { Article as ArticleType, Story as StoryType, Page } from "../../../lib/types";
-import Article from '../../../layout/Article'
-import Story from '../../../layout/Story'
-
+import Article from "../../../layout/Article";
+import StoryLayout from "../../../layout/StoryLayout";
+import { Article as ArticleType, Page, Story } from "../../../lib/types";
 import { useGetOneDoc } from "../../../lib/useGetOneDoc";
-import StoryForm from "../../../components/forms/StoryForm";
 
 const IndividualPage: NextPage = ({}) => {
   const router = useRouter();
@@ -24,7 +20,7 @@ const IndividualPage: NextPage = ({}) => {
   }
 
   if (!post) {
-    return null
+    return null;
   }
 
   const content = (() => {
@@ -34,8 +30,7 @@ const IndividualPage: NextPage = ({}) => {
       case Page.AUDIO:
         return "TODO: Add AudioForm;";
       case Page.STORIES:
-        return "This is stories"
-      // return <Story story={post as StoryType} />
+        return <StoryLayout story={post as Story} />;
     }
   })();
 
@@ -45,10 +40,7 @@ const IndividualPage: NextPage = ({}) => {
         <title>{post ? post.title : "Not found"}</title>
       </Head>
       <PageLayout page={page}>
-        <div>
-          {post ? content : null}
-          {!loading && !post && <h1>Not found</h1>}
-        </div>
+        {post ? content : !loading && <h1>Not found</h1>}
       </PageLayout>
     </>
   );

@@ -1,19 +1,15 @@
-import { capitalize } from "@mui/material";
 import { NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
-import ArticleForm from "../../components/forms/ArticleForm";
-import PageLayout from "../../components/PageLayout";
-import { Article as ArticleType, Story as StoryType, Page } from "../../lib/types";
-import Article from '../../layout/Article'
-import Story from '../../layout/Story'
+import StoryForm from "../../../components/forms/StoryForm";
+import PageLayout from "../../../components/PageLayout";
+import ArticleLayout from "../../../layout/Article";
+import { Article, Page, Story } from "../../../lib/types";
+import { useGetOneDoc } from "../../../lib/useGetOneDoc";
 
-import { useGetOneDoc } from "../../lib/useGetOneDoc";
-import StoryForm from "../../components/forms/StoryForm";
-
-const IndividualPage: NextPage = ({}) => {
+const EditPage: NextPage = ({}) => {
   const router = useRouter();
   const page = router.query.page as Page;
   const postId = router.query.id as string;
@@ -24,17 +20,17 @@ const IndividualPage: NextPage = ({}) => {
   }
 
   if (!post) {
-    return null
+    return null;
   }
 
   const content = (() => {
     switch (page) {
       case Page.ARTICLES:
-        return <Article article={post as ArticleType} />;
+        return <ArticleLayout article={post as Article} />;
       case Page.AUDIO:
         return "TODO: Add AudioForm;";
       case Page.STORIES:
-      return <Story story={post as StoryType} />
+        return <StoryForm story={post as Story} />;
     }
   })();
 
@@ -53,4 +49,4 @@ const IndividualPage: NextPage = ({}) => {
   );
 };
 
-export default IndividualPage;
+export default EditPage;

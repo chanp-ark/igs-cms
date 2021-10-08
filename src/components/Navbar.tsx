@@ -1,19 +1,18 @@
-import { AppBar, Box, Button, capitalize, IconButton, Toolbar, Typography, Tabs, Tab} from "@mui/material";
+import { Box, Button, capitalize, Tab, Tabs } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
-import { useAuthContext } from "../lib/useAuthContext";
 import { Page } from "../lib/types";
+import { useAuthContext } from "../lib/useAuthContext";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
   const { logout } = useAuthContext();
   const pages = Object.values(Page);
-  const [activeTab, setActiveTab] = useState('')
+  const currentPage = router.query.page;
 
   const handleClick = (selectedTab: string) => {
-    setActiveTab(selectedTab)
-    router.push(`/${selectedTab}`)
-  }
+    router.push(`/${selectedTab}`);
+  };
 
   return (
     <Box
@@ -21,23 +20,27 @@ const Navbar: React.FC = () => {
         background: "#eaaaaa",
         padding: "20px",
         flexGrow: 1,
-        display: 'flex',
-        justifyContent: 'space-between'
+        display: "flex",
+        justifyContent: "space-between",
       }}
     >
       <Tabs
         textColor="secondary"
         indicatorColor="secondary"
-        value={activeTab}
+        value={currentPage === router.asPath.split("/")[1]}
       >
-        {pages.map((page) => {
-            return (
-              <Tab key={page} label={capitalize(page)} value={page} onClick={() => handleClick(page)} sx={{margin: '0 1rem'}}/>
-            );
-          })}
+        {pages.map((page) => (
+          <Tab
+            key={page}
+            label={capitalize(page)}
+            value={page}
+            onClick={() => handleClick(page)}
+            sx={{ margin: "0 1rem" }}
+          />
+        ))}
       </Tabs>
       <Button onClick={logout} variant="contained">
-          Log Out
+        Log Out
       </Button>
     </Box>
   );
