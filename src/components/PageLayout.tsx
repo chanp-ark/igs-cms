@@ -10,7 +10,6 @@ interface Props {
 const PageLayout: React.FC<Props> = ({ page, children }) => {
   return (
     <>
-      <Navbar />
       <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
         <Sidebar page={page} />
         {children}
