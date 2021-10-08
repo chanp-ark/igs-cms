@@ -1,11 +1,5 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
-
 import React, { useState } from "react";
 
 const ArticleLayout = ({ article }) => {
@@ -17,13 +11,13 @@ const ArticleLayout = ({ article }) => {
   const [body] = useState(article.html);
   const [image] = useState(article.thumbnail);
 
-  console.log(typeof body)
+  console.log(typeof body);
 
   const handleSubmit = () => {};
 
   return (
     <Box
-      sx={{         
+      sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -36,86 +30,62 @@ const ArticleLayout = ({ article }) => {
         padding: "2rem 1rem",
       }}
     >
-    <div>
-      <Box>
-        <Typography variant="h6" shrink={false}>
-          Title
-        </Typography>
-        <Typography
-          sx={{ width: "45%" }}
-          variant="body1"
-        >
-        {title}
-        </Typography>
-      </Box>
-
-      <Divider />
-
-      <Box>        
-        <Typography variant="h6">
-          Subtitle
-        </Typography>
-
-        <Typography
-          sx={{ width: "45%" }}
-          variant="body1"
-        >
-        {subtitle}
-        </Typography>
-      </Box>
-
-      <Divider />
-
-      <Box>        
-        <Typography variant="h6">
-          Duration
-        </Typography>
-
-        <Typography
-          sx={{ width: "45%" }}
-          variant="body1"
-        >
-        {duration}
-        </Typography>
-      </Box>
-      
-      <Divider />
-
-      <Box >
-        <Typography variant="h6">
-          Body
-        </Typography>
-        <Typography
-          sx={{ width: "45%" }}
-          variant="body2"
-        >
-          <div dangerouslySetInnerHTML={{ __html: body}} />
-        </Typography>
-      </Box>
-
-      <Divider />
-
-      <Box>
-        <Typography variant="h6">
-          Image
-        </Typography>
-        {image ? (
-          <Typography variant="body2">
-            {image}
+      <div>
+        <Box>
+          <Typography variant="h6" shrink={false}>
+            Title
           </Typography>
-        ) : null}
-      </Box>
+          <Typography sx={{ width: "45%" }} variant="body1">
+            {title}
+          </Typography>
+        </Box>
 
-      <Button
-        color="secondary"
-        type="submit"
-        variant="contained"
-        sx={{ marginTop: "3rem", marginLeft: "0.5rem" }}
-        onClick={() => router.push(router.asPath + "/edit")}
-      >
-        Edit
-      </Button>
-    </div>
+        <Divider />
+
+        <Box>
+          <Typography variant="h6">Subtitle</Typography>
+
+          <Typography sx={{ width: "45%" }} variant="body1">
+            {subtitle}
+          </Typography>
+        </Box>
+
+        <Divider />
+
+        <Box>
+          <Typography variant="h6">Duration</Typography>
+
+          <Typography sx={{ width: "45%" }} variant="body1">
+            {duration}
+          </Typography>
+        </Box>
+
+        <Divider />
+
+        <Box>
+          <Typography variant="h6">Body</Typography>
+          <Typography sx={{ width: "45%" }} variant="body2">
+            <div dangerouslySetInnerHTML={{ __html: body }} />
+          </Typography>
+        </Box>
+
+        <Divider />
+
+        <Box>
+          <Typography variant="h6">Image</Typography>
+          {image ? <Typography variant="body2">{image}</Typography> : null}
+        </Box>
+
+        <Button
+          color="secondary"
+          type="submit"
+          variant="contained"
+          sx={{ marginTop: "3rem", marginLeft: "0.5rem" }}
+          onClick={() => router.push(router.asPath + "/edit")}
+        >
+          Edit
+        </Button>
+      </div>
     </Box>
   );
 };

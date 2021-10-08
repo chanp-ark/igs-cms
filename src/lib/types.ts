@@ -6,19 +6,24 @@ export enum Page {
 }
 
 export interface Article {
+  type: Page.ARTICLES;
   title: string;
   subtitle: string;
   duration: string;
-  body: string;
-  image: string;
+  html: string;
+  thumbnail: string;
 }
 export interface Audio {
+  type: Page.AUDIO;
   title: string;
-  image: string;
   duration: string;
+  url: string;
 }
 
 export interface Story {
+  type: Page.STORIES;
   title: string;
-  images: string[]; // array of url?
+  images: string[];
 }
+
+export type Post = Article | Audio | Story;

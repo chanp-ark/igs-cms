@@ -7,7 +7,8 @@ import { useAuthContext } from "../lib/hooks/useAuthContext";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const {user} = useAuthContext()
+  const { user } = useAuthContext();
+
   return (
     <AlertContextProvider>
       <ProtectRoute>

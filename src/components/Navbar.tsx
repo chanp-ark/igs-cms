@@ -1,8 +1,7 @@
 import { Box, Button, capitalize, Tab, Tabs } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
-import { useState } from "react";
-import { Page } from "../lib/types";
 import { useAuthContext } from "../lib/hooks/useAuthContext";
+import { Page } from "../lib/types";
 
 const Navbar: React.FC = () => {
   const router = useRouter();

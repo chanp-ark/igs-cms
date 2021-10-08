@@ -4,10 +4,11 @@ import ErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
 import ArticleForm from "../../../components/forms/ArticleForm";
+import AudioForm from "../../../components/forms/AudioForm";
 import StoryForm from "../../../components/forms/StoryForm";
 import PageLayout from "../../../components/PageLayout";
 import { useGetOneDoc } from "../../../lib/hooks/useGetOneDoc";
-import { Article, Page, Story } from "../../../lib/types";
+import { Article, Audio, Page, Story } from "../../../lib/types";
 
 const EditPage: NextPage = ({}) => {
   const router = useRouter();
@@ -22,12 +23,11 @@ const EditPage: NextPage = ({}) => {
   const content = (() => {
     switch (page) {
       case Page.ARTICLES:
-        return <ArticleForm article={post as Article} />;
+        return <ArticleForm postId={postId} article={post as Article} />;
       case Page.AUDIO:
-        return "TODO AudioForms";
-      // return <AudioForm audio={post as Audio} />;
+        return <AudioForm postId={postId} audio={post as Audio} />;
       case Page.STORIES:
-        return <StoryForm story={post as Story} />;
+        return <StoryForm postId={postId} story={post as Story} />;
     }
   })();
 
