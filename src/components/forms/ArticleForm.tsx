@@ -22,7 +22,6 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
   const [duration, setDuration] = useState(article.duration);
 
   const handleSubmit = () => {};
-  const submitButtonText = "Post";
 
   return (
     <Box
@@ -39,7 +38,7 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
         padding: "2rem 1rem",
       }}
     >
-      <form style={{ width: "600px" }} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
       <FormControl>
         <InputLabel htmlFor={"title"} shrink={false}>
           Title
@@ -50,7 +49,6 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
           type="text"
           placeholder="Title"
           value={title}
-          sx={{ width: "45%" }}
         />
       </FormControl>
 
@@ -64,8 +62,7 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
           onChange={(e) => setSubtitle(e.target.value)}
           type="text"
           placeholder="Subtitle"
-          value={title}
-          sx={{ width: "45%" }}
+          value={subtitle}
         />
       </FormControl>
   
@@ -79,7 +76,6 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
           type="text"
           placeholder="ex: 3-4 minute read"
           value={duration}
-          sx={{ width: "45%" }}
         />
       </FormControl>
 
@@ -93,7 +89,7 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
           name="body"
           onChange={(e) => setBody(e.target.value)}
           value={body}
-          style={{ width: "270px" }}
+          style={{ width: '50%', marginLeft: '18rem'}}
         />
       </FormControl>
 
@@ -115,7 +111,7 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
           sx={{ width: "45%" }}
         />
         {image ? (
-          <Typography variant="subtitle2" sx={{ width: "300px" }}>
+          <Typography variant="subtitle2" sx={{ width: "50%", marginLeft: '18rem' }}>
             {image}
           </Typography>
         ) : null}
@@ -124,9 +120,9 @@ const ArticleForm: React.FC<ArticleProps> = ({ article }) => {
         color="primary"
         type="submit"
         variant="contained"
-        sx={{ marginTop: "3rem", marginLeft: "0.5rem" }}
+        sx={{ marginTop: "3rem", marginLeft: "0.5rem", width: '10%' }}
       >
-        {submitButtonText}
+        Save
       </Button>
     </form>
     </Box>

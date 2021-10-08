@@ -1,9 +1,14 @@
-import { Box, Button, Divider, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Typography,
+} from "@mui/material";
 import { useRouter } from "next/dist/client/router";
-import React, { useEffect, useState } from "react";
-import { Article } from "../lib/types";
 
-const ArticleLayout: React.FC<{ article: Article }> = ({ article }) => {
+import React, { useState } from "react";
+
+const ArticleLayout = ({ article }) => {
   const router = useRouter();
 
   const [title] = useState(article.title);
@@ -33,7 +38,7 @@ const ArticleLayout: React.FC<{ article: Article }> = ({ article }) => {
     >
     <div>
       <Box>
-        <Typography variant="h6">
+        <Typography variant="h6" shrink={false}>
           Title
         </Typography>
         <Typography
