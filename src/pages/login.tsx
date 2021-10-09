@@ -82,14 +82,14 @@ const LoginForm: React.FC = () => {
             placeholder="Email"
             type="email"
             value={email}
-            style={{ marginBottom: "1rem" }}
+            style={{ marginBottom: "1rem", maxWidth: "100%" }}
           />
           <Input
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             type="password"
             value={password}
-            style={{ marginBottom: "1rem" }}
+            style={{ marginBottom: "1rem", maxWidth: "100%"  }}
           />
           <Button
             type="submit"
