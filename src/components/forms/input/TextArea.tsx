@@ -10,8 +10,26 @@ const TextArea: React.FC<TextInputProps> = ({
   value,
   setValue,
 }) => {
-  const { useQuill } = require('react-quilljs');
-  const { quill, quillRef } = useQuill();
+  const theme = 'snow';
+
+  const modules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ list: 'ordered'}, { list: 'bullet' }],
+    ],
+  };
+
+  const { quill, quillRef } = useQuill({ theme, modules });
+
+  React.useEffect(() => {
+    if (quill) {
+      quill.clipboard.dangerouslyPasteHTML(value);
+
+      quill.on('text-change', (delta, oldDelta, source) => {
+        setValue(quillRef.current.firstChild.innerHTML)
+      });
+    }
+  }, [quill]);
 
   return (
     <FormControl>
@@ -26,7 +44,7 @@ const TextArea: React.FC<TextInputProps> = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
       /> */}
-      <div style={{ width: 500, height: 300 }}>
+      <div style={{ width: 500, height: 200, marginBottom: '5rem' }}>
         <div ref={quillRef} />
       </div>
     </FormControl>

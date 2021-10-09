@@ -19,3 +19,7 @@ form .MuiFormControl-root {
   justify-content: space-between;
   margin: 0.5rem;
 }
+
+.MuiInput-root {
+  width: 500px
+}
