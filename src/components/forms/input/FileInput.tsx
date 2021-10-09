@@ -1,4 +1,4 @@
-import { Button, FormControl, InputLabel } from "@mui/material";
+import { Button, FormControl, InputLabel, Typography } from "@mui/material";
 import React from "react";
 
 interface FileInputProps {
@@ -31,10 +31,16 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
           style={{ display: "none" }}
         />
         <label htmlFor="container-file-button">
-          <Button variant="contained" color="primary" component="span">
-            {fileName || "Choose File"}
+          <Button variant="contained" color="primary" sx={{marginTop:'1rem'}} component="span">
+            {"Choose File"}
           </Button>
         </label>
+        { fileName
+          ? <Typography variant="body2" sx={{marginTop:'1rem'}}>
+            {fileName}
+          </Typography>
+          : null
+        }
       </FormControl>
     );
   }
