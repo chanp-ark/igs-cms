@@ -1,17 +1,14 @@
 import { Button, MenuItem } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
-import { useGetDocs } from "../lib/hooks/useGetDocs";
+import { useDataContext } from "../lib/dataContext";
 import { Page } from "../lib/types";
 
-interface SidebarProps {
-  page: Page;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ page }) => {
+const Sidebar: React.FC = () => {
   const router = useRouter();
+  const page = router.query.page as Page;
   const postId = router.query.id;
-  const postList = useGetDocs(page);
+  const { postList } = useDataContext(page);
 
   const styling = {
     display: "block",

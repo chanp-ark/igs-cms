@@ -1,8 +1,7 @@
 import { Box, Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useRef, useState } from "react";
-import { useAlertContext } from "../../lib/alertContext";
-import { createPost, updatePost } from "../../lib/posts";
+import { useHandleSubmitPost } from "../../lib/hooks/useHandleSubmitPost";
 import { Article, Page } from "../../lib/types";
 import FileInput from "./input/FileInput";
 import TextArea from "./input/TextArea";
@@ -13,7 +12,6 @@ type ArticleFormProps = AllOrNone<{ postId: string; article: Article }>;
 
 const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
   const router = useRouter();
-  const { setAlert } = useAlertContext();
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [duration, setDuration] = useState("");
@@ -22,7 +20,6 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File>();
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (!article) return;
@@ -41,7 +38,8 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const { handleSubmitPost, isSubmitting } = useHandleSubmitPost(Page.ARTICLES);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newArticle: Article = {
       type: Page.ARTICLES,
@@ -51,29 +49,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
       html,
       thumbnail,
     };
-
-    const formFilled = Object.values(newArticle).every((entry) => entry !== "");
-    if (!formFilled) {
-      setAlert("Empty form, please fill in all fields");
-      return;
-    }
-    setIsSubmitting(true);
-
-    if (postId && article) {
-      await updatePost(postId, Page.ARTICLES, newArticle);
-      setAlert("Post updated!");
-      setIsSubmitting(false);
-      router.push(`/${Page.ARTICLES}/${postId}`);
-    } else {
-      if (!file) {
-        alert("No file?");
-        return;
-      }
-      const newPostId = await createPost(Page.ARTICLES, newArticle, file);
-      setAlert("Post successful!");
-      setIsSubmitting(false);
-      router.push(`/${Page.ARTICLES}/${newPostId}`);
-    }
+    handleSubmitPost(newArticle, postId, file);
   };
 
   const handleCancel = () =>

@@ -1,16 +1,13 @@
 import { Button, Divider } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
-import { deletePost } from "../../lib/posts";
-import { Audio, Page } from "../../lib/types";
+import { useHandleDelete } from "../../lib/hooks/useHandleDelete";
+import { Audio } from "../../lib/types";
 import BoxTypography from "./BoxTypography";
 import ContentContainer from "./ContentContainer";
 
 const AudioContent: React.FC<{ audio: Audio }> = ({ audio }) => {
   const router = useRouter();
-  const page = router.query.page as Page;
-  const postId = router.query.id as string;
-
   const [title, setTitle] = useState("");
   const [duration, setDuration] = useState("");
   const [url, setUrl] = useState("");
@@ -23,10 +20,7 @@ const AudioContent: React.FC<{ audio: Audio }> = ({ audio }) => {
   }, [audio]);
 
   const handleEdit = () => router.push(router.asPath + "/edit");
-  const handleDelete = () => {
-    deletePost(page, postId);
-    router.push(`/${page}`);
-  };
+  const handleDelete = useHandleDelete();
 
   return (
     <ContentContainer>

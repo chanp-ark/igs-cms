@@ -6,10 +6,9 @@ import React from "react";
 import ArticleForm from "../../components/forms/ArticleForm";
 import AudioForm from "../../components/forms/AudioForm";
 import StoryForm from "../../components/forms/StoryForm";
-import PageLayout from "../../components/PageLayout";
 import { Page } from "../../lib/types";
 
-const IndividualPage: NextPage = ({}) => {
+const NewPage: NextPage = ({}) => {
   const router = useRouter();
   const page = router.query.page as Page;
 
@@ -38,4 +37,4 @@ const IndividualPage: NextPage = ({}) => {
   );
 };
 
-export default IndividualPage;
+export default NewPage;
