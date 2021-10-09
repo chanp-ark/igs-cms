@@ -15,7 +15,7 @@ const TextArea: React.FC<TextInputProps> = ({
       </InputLabel>
       <TextareaAutosize
         aria-label="body"
-        style={{ width: "50%", marginLeft: "18rem" }}
+        style={{ width: "50%", marginLeft: "15rem" }}
         minRows={5}
         name={name}
         value={value}

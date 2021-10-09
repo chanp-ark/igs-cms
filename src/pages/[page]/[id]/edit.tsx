@@ -6,7 +6,6 @@ import React from "react";
 import ArticleForm from "../../../components/forms/ArticleForm";
 import AudioForm from "../../../components/forms/AudioForm";
 import StoryForm from "../../../components/forms/StoryForm";
-import PageLayout from "../../../components/PageLayout";
 import { useGetOneDoc } from "../../../lib/hooks/useGetOneDoc";
 import { Article, Audio, Page, Story } from "../../../lib/types";
 
@@ -36,10 +35,8 @@ const EditPage: NextPage = ({}) => {
       <Head>
         <title>{post ? post.title : "Not found"}</title>
       </Head>
-      <PageLayout page={page}>
-        {post ? content : null}
-        {!loading && !post && <h1>Not found</h1>}
-      </PageLayout>
+      {post ? content : null}
+      {!loading && !post && <h1>Not found</h1>}
     </>
   );
 };

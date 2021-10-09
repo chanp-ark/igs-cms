@@ -1,10 +1,9 @@
-import { capitalize } from "@mui/material";
+import { capitalize, Typography } from "@mui/material";
 import { NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
-import PageLayout from "../../components/PageLayout";
 import { Page } from "../../lib/types";
 
 const IndividualPage: NextPage = ({}) => {
@@ -24,9 +23,9 @@ const IndividualPage: NextPage = ({}) => {
       <Head>
         <title>{capitalize(page)}</title>
       </Head>
-      <PageLayout page={page}>
-        <h1>{capitalize(page)}</h1>
-      </PageLayout>
+      <Typography variant="h3" sx={{ margin: "auto" }}>
+        {capitalize(page)}
+      </Typography>
     </>
   );
 };

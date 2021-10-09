@@ -3,10 +3,9 @@ import { useRouter } from "next/dist/client/router";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
-import ArticleLayout from "../../../components/layout/ArticleLayout";
-import AudioLayout from "../../../components/layout/AudioLayout";
-import StoryLayout from "../../../components/layout/StoryLayout";
-import PageLayout from "../../../components/PageLayout";
+import ArticleContent from "../../../components/content/ArticleContent";
+import AudioContent from "../../../components/content/AudioContent";
+import StoryContent from "../../../components/content/StoryContent";
 import { useGetOneDoc } from "../../../lib/hooks/useGetOneDoc";
 import { Article, Audio, Page, Story } from "../../../lib/types";
 
@@ -23,11 +22,11 @@ const IndividualPage: NextPage = ({}) => {
   const content = (() => {
     switch (page) {
       case Page.ARTICLES:
-        return <ArticleLayout article={post as Article} />;
+        return <ArticleContent article={post as Article} />;
       case Page.AUDIO:
-        return <AudioLayout audio={post as Audio} />;
+        return <AudioContent audio={post as Audio} />;
       case Page.STORIES:
-        return <StoryLayout story={post as Story} />;
+        return <StoryContent story={post as Story} />;
     }
   })();
 
@@ -36,9 +35,7 @@ const IndividualPage: NextPage = ({}) => {
       <Head>
         <title>{post ? post.title : "Not found"}</title>
       </Head>
-      <PageLayout page={page}>
-        {post ? content : !loading && <h1>Not found</h1>}
-      </PageLayout>
+      {post ? content : !loading && <h1>Not found</h1>}
     </>
   );
 };

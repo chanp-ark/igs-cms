@@ -12,9 +12,18 @@ const BoxTypography: React.FC<BoxTypographyProps> = ({
   children,
 }) => {
   return (
-    <Box>
-      <Typography variant="h6">{label}</Typography>
-      <Typography sx={{ width: "45%" }} variant="body1">
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        margin: "1rem",
+      }}
+    >
+      <Typography variant="h6" sx={{ flex: 1 }}>
+        {label}
+      </Typography>
+      <Typography variant="body1" sx={{ flex: 2 }}>
         {content}
         {children}
       </Typography>

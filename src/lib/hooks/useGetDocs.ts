@@ -1,10 +1,11 @@
 import { collection, DocumentData, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { db } from "../firebase";
 import { Page } from "../types";
 
 export const useGetDocs = (page: Page) => {
   const [postList, setPostList] = useState<DocumentData[]>([]);
+  const posts = useMemo(() => postList, [postList]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -24,5 +25,5 @@ export const useGetDocs = (page: Page) => {
     fetch();
   }, [page]);
 
-  return postList;
+  return posts;
 };

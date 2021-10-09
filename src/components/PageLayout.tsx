@@ -8,12 +8,10 @@ interface Props {
 
 const PageLayout: React.FC<Props> = ({ page, children }) => {
   return (
-    <>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
-        <Sidebar page={page} />
-        {children}
-      </div>
-    </>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr" }}>
+      <Sidebar page={page} />
+      {children}
+    </div>
   );
 };
 
