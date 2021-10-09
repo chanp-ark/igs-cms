@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useAlertContext } from "../../lib/alertContext";
@@ -22,6 +22,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (!article) return;
@@ -50,17 +51,18 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
       html,
       thumbnail,
     };
-    console.log(newArticle);
 
     const formFilled = Object.values(newArticle).every((entry) => entry !== "");
     if (!formFilled) {
       setAlert("Empty form, please fill in all fields");
       return;
     }
+    setIsSubmitting(true);
 
     if (postId && article) {
-      updatePost(postId, Page.ARTICLES, newArticle);
+      await updatePost(postId, Page.ARTICLES, newArticle);
       setAlert("Post updated!");
+      setIsSubmitting(false);
       router.push(`/${Page.ARTICLES}/${postId}`);
     } else {
       if (!file) {
@@ -69,6 +71,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
       }
       const newPostId = await createPost(Page.ARTICLES, newArticle, file);
       setAlert("Post successful!");
+      setIsSubmitting(false);
       router.push(`/${Page.ARTICLES}/${newPostId}`);
     }
   };
@@ -81,6 +84,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
   return (
     <Box
       sx={{
+        position: "relative",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -138,6 +142,23 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
           </Button>
         </Box>
       </form>
+      {isSubmitting && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: "100%",
+            width: "100%",
+            bgcolor: "black",
+            opacity: "70%",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <CircularProgress color="secondary" />
+        </Box>
+      )}
     </Box>
   );
 };

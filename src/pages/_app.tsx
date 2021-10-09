@@ -1,20 +1,30 @@
 import type { AppProps } from "next/app";
+import { useRouter } from "next/dist/client/router";
 import React from "react";
+import ConditionalWrap from "../components/ConditionalWrap";
 import Navbar from "../components/Navbar";
+import PageLayout from "../components/PageLayout";
 import ProtectRoute from "../components/ProtectRoute";
 import { AlertContextProvider } from "../lib/alertContext";
 import { useAuthContext } from "../lib/hooks/useAuthContext";
+import { Page } from "../lib/types";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { user } = useAuthContext();
+  const router = useRouter();
+  const page = router.query.page as Page;
 
   return (
     <AlertContextProvider>
       <ProtectRoute>
         {user ? <Navbar /> : null}
-
-        <Component {...pageProps} />
+        <ConditionalWrap
+          condition={Boolean(page)}
+          wrap={(children) => <PageLayout page={page}>{children}</PageLayout>}
+        >
+          <Component {...pageProps} />
+        </ConditionalWrap>
       </ProtectRoute>
     </AlertContextProvider>
   );

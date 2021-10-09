@@ -7,7 +7,6 @@ const Navbar: React.FC = () => {
   const router = useRouter();
   const { logout } = useAuthContext();
   const pages = Object.values(Page);
-  const currentPage = router.query.page;
 
   const handleClick = (selectedTab: string) => {
     router.push(`/${selectedTab}`);

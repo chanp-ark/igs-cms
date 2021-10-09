@@ -1,12 +1,12 @@
+import { Typography } from "@mui/material";
 import type { NextPage } from "next";
 import React from "react";
-// import Navbar from "../components/Navbar";
 
 const Home: NextPage = () => {
   return (
-    <>
-      <h1>Welcome to BabySleepy</h1>
-    </>
+    <Typography variant="h1" sx={{ textAlign: "center", marginTop: "4rem" }}>
+      Welcome to BabySleepy
+    </Typography>
   );
 };
 

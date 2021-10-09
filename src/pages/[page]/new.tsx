@@ -33,7 +33,7 @@ const IndividualPage: NextPage = ({}) => {
       <Head>
         <title>New {page}</title>
       </Head>
-      <PageLayout page={page}>{content}</PageLayout>
+      {content}
     </>
   );
 };
