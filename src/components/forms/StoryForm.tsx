@@ -32,7 +32,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ postId, story }) => {
     }
   };
 
-  const { handleSubmitPost, isSubmitting } = useHandleSubmitPost(Page.ARTICLES);
+  const { handleSubmitPost, isSubmitting } = useHandleSubmitPost(Page.STORIES);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newStory: Story = {

@@ -24,16 +24,16 @@ export const useHandleSubmitPost = (page: Page) => {
         await updatePost(postId, page, post);
         setAlert("Post updated!");
         setIsSubmitting(false);
-        router.push(`/${Page.ARTICLES}/${postId}`);
+        router.push(`/${page}/${postId}`);
       } else {
         if (!files) {
           alert("No file?");
           return;
         }
-        const newPostId = await createPost(Page.ARTICLES, post, files);
+        const newPostId = await createPost(page, post, files);
         setAlert("Post successful!");
         setIsSubmitting(false);
-        router.push(`/${Page.ARTICLES}/${newPostId}`);
+        router.push(`/${page}/${newPostId}`);
       }
 
       refetch();
