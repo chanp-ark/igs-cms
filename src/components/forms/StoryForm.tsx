@@ -57,7 +57,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ postId, story }) => {
         overflow: "hidden",
         borderRadius: "12px",
         boxShadow: 1,
-        fontWeight: "bold",
         margin: "1rem",
         padding: "2rem 1rem",
       }}
