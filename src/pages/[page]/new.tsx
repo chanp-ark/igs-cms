@@ -7,20 +7,13 @@ import ArticleForm from "../../components/forms/ArticleForm";
 import AudioForm from "../../components/forms/AudioForm";
 import StoryForm from "../../components/forms/StoryForm";
 import PageLayout from "../../components/PageLayout";
-import { Article, Page } from "../../lib/types";
-import { useGetOneDoc } from "../../lib/useGetOneDoc";
+import { Page } from "../../lib/types";
 
 const IndividualPage: NextPage = ({}) => {
   const router = useRouter();
   const page = router.query.page as Page;
-  const postId = router.query.id as string;
-  const { loading, post } = useGetOneDoc(page, postId);
 
-  if (loading) {
-    return null;
-  }
-
-  if (!Object.values(Page).includes(page) || !post) {
+  if (!Object.values(Page).includes(page)) {
     return <ErrorPage statusCode={404} />;
   }
 
@@ -40,9 +33,7 @@ const IndividualPage: NextPage = ({}) => {
       <Head>
         <title>New {page}</title>
       </Head>
-      <PageLayout page={page}>
-        <div>{content}</div>
-      </PageLayout>
+      <PageLayout page={page}>{content}</PageLayout>
     </>
   );
 };

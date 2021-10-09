@@ -9,7 +9,7 @@ form {
   flex-direction: column;
 }
 
-.MuiBox-root .MuiBox-root{
+.MuiBox-root .MuiBox-root {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,7 +20,7 @@ form {
   max-width: 80%;
 }
 
-form .MuiFormControl-root{
+form .MuiFormControl-root {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,7 +31,3 @@ form .MuiInput-root {
   width: 50%;
   margin-left: 18rem;
 }
-
-
-
-

@@ -3,11 +3,12 @@ import { useRouter } from "next/dist/client/router";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import React from "react";
+import ArticleLayout from "../../../components/layout/ArticleLayout";
+import AudioLayout from "../../../components/layout/AudioLayout";
+import StoryLayout from "../../../components/layout/StoryLayout";
 import PageLayout from "../../../components/PageLayout";
-import ArticleLayout from "../../../layout/ArticleLayout";
-import StoryLayout from "../../../layout/StoryLayout";
 import { useGetOneDoc } from "../../../lib/hooks/useGetOneDoc";
-import { Article, Page, Story } from "../../../lib/types";
+import { Article, Audio, Page, Story } from "../../../lib/types";
 
 const IndividualPage: NextPage = ({}) => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const IndividualPage: NextPage = ({}) => {
       case Page.ARTICLES:
         return <ArticleLayout article={post as Article} />;
       case Page.AUDIO:
-        return "TODO AudioLayout";
+        return <AudioLayout audio={post as Audio} />;
       case Page.STORIES:
         return <StoryLayout story={post as Story} />;
     }

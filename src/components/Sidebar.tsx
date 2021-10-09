@@ -10,8 +10,8 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ page }) => {
   const router = useRouter();
-  const postList = useGetDocs(page);
   const postId = router.query.id;
+  const postList = useGetDocs(page);
 
   const styling = {
     display: "block",
