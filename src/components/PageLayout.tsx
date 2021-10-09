@@ -1,15 +1,10 @@
 import React from "react";
-import { Page } from "../lib/types";
 import Sidebar from "./Sidebar";
 
-interface Props {
-  page: Page;
-}
-
-const PageLayout: React.FC<Props> = ({ page, children }) => {
+const PageLayout: React.FC = ({ children }) => {
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 3fr" }}>
-      <Sidebar page={page} />
+      <Sidebar />
       {children}
     </div>
   );

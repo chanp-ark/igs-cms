@@ -6,14 +6,14 @@ import React from "react";
 import ArticleForm from "../../../components/forms/ArticleForm";
 import AudioForm from "../../../components/forms/AudioForm";
 import StoryForm from "../../../components/forms/StoryForm";
-import { useGetOneDoc } from "../../../lib/hooks/useGetOneDoc";
+import { useDoc } from "../../../lib/dataContext";
 import { Article, Audio, Page, Story } from "../../../lib/types";
 
 const EditPage: NextPage = ({}) => {
   const router = useRouter();
   const page = router.query.page as Page;
   const postId = router.query.id as string;
-  const { loading, post } = useGetOneDoc(page, postId);
+  const { post, loading } = useDoc(page, postId);
 
   if (!Object.values(Page).includes(page)) {
     return <ErrorPage statusCode={404} />;

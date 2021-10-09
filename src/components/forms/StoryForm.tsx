@@ -1,8 +1,7 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useRef, useState } from "react";
-import { useAlertContext } from "../../lib/alertContext";
-import { createPost, updatePost } from "../../lib/posts";
+import { useHandleSubmitPost } from "../../lib/hooks/useHandleSubmitPost";
 import { Page, Story } from "../../lib/types";
 import FileInput from "./input/FileInput";
 import TextInput from "./input/TextInput";
@@ -12,7 +11,6 @@ type StoryFormProps = AllOrNone<{ postId: string; story: Story }>;
 
 const StoryForm: React.FC<StoryFormProps> = ({ postId, story }) => {
   const router = useRouter();
-  const { setAlert } = useAlertContext();
   const [title, setTitle] = useState("");
   const [images, setImages] = useState<string[]>([]);
 
@@ -34,30 +32,15 @@ const StoryForm: React.FC<StoryFormProps> = ({ postId, story }) => {
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const { handleSubmitPost, isSubmitting } = useHandleSubmitPost(Page.ARTICLES);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newStory: Story = {
       type: Page.STORIES,
       title,
       images,
     };
-
-    const formFilled =
-      Object.values(newStory).every((entry) => entry !== "") && files;
-
-    if (!formFilled) {
-      setAlert("Empty form, please fill in all fields");
-      return;
-    }
-
-    if (postId && story) {
-      updatePost(postId, Page.STORIES, newStory, files);
-      setAlert("Post updated!");
-    } else {
-      const postId = await createPost(Page.STORIES, newStory, files);
-      setAlert("Post successful!");
-      router.push(`/${Page.STORIES}/${postId}`);
-    }
+    handleSubmitPost(newStory, postId, files);
   };
 
   const handleCancel = () =>
@@ -112,6 +95,23 @@ const StoryForm: React.FC<StoryFormProps> = ({ postId, story }) => {
           </Button>
         </Box>
       </form>
+      {isSubmitting && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: "100%",
+            width: "100%",
+            bgcolor: "black",
+            opacity: "70%",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <CircularProgress color="secondary" />
+        </Box>
+      )}
     </Box>
   );
 };

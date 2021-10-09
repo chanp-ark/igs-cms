@@ -1,16 +1,13 @@
 import { Button, Divider } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
-import { deletePost } from "../../lib/posts";
-import { Page, Story } from "../../lib/types";
+import { useHandleDelete } from "../../lib/hooks/useHandleDelete";
+import { Story } from "../../lib/types";
 import BoxTypography from "./BoxTypography";
 import ContentContainer from "./ContentContainer";
 
 const StoryContent: React.FC<{ story: Story }> = ({ story }) => {
   const router = useRouter();
-  const page = router.query.page as Page;
-  const postId = router.query.id as string;
-
   const [title, setTitle] = useState("");
   const [images, setImages] = useState<string[]>([]);
 
@@ -21,10 +18,7 @@ const StoryContent: React.FC<{ story: Story }> = ({ story }) => {
   }, [story]);
 
   const handleEdit = () => router.push(router.asPath + "/edit");
-  const handleDelete = () => {
-    deletePost(page, postId);
-    router.push(`/${page}`);
-  };
+  const handleDelete = useHandleDelete();
 
   return (
     <ContentContainer>

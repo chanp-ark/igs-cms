@@ -6,7 +6,7 @@ import Head from "next/head";
 import React from "react";
 import { Page } from "../../lib/types";
 
-const IndividualPage: NextPage = ({}) => {
+const IndexPage: NextPage = ({}) => {
   const router = useRouter();
   const page = router.query.page as Page;
 
@@ -30,4 +30,4 @@ const IndividualPage: NextPage = ({}) => {
   );
 };
 
-export default IndividualPage;
+export default IndexPage;

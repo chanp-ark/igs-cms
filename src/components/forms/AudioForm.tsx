@@ -1,8 +1,7 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useRef, useState } from "react";
-import { useAlertContext } from "../../lib/alertContext";
-import { createPost, updatePost } from "../../lib/posts";
+import { useHandleSubmitPost } from "../../lib/hooks/useHandleSubmitPost";
 import { Audio, Page } from "../../lib/types";
 import FileInput from "./input/FileInput";
 import TextInput from "./input/TextInput";
@@ -12,7 +11,6 @@ type AudioFormProps = AllOrNone<{ postId: string; audio: Audio }>;
 
 const AudioForm: React.FC<AudioFormProps> = ({ postId, audio }) => {
   const router = useRouter();
-  const { setAlert } = useAlertContext();
   const [title, setTitle] = useState("");
   const [duration, setDuration] = useState("");
   const [url, setUrl] = useState("");
@@ -35,7 +33,8 @@ const AudioForm: React.FC<AudioFormProps> = ({ postId, audio }) => {
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const { handleSubmitPost, isSubmitting } = useHandleSubmitPost(Page.AUDIO);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newAudio: Audio = {
       type: Page.AUDIO,
@@ -43,23 +42,7 @@ const AudioForm: React.FC<AudioFormProps> = ({ postId, audio }) => {
       duration,
       url,
     };
-
-    const formFilled =
-      Object.values(newAudio).every((entry) => entry !== "") && file;
-
-    if (!formFilled) {
-      setAlert("Empty form, please fill in all fields");
-      return;
-    }
-
-    if (postId && audio) {
-      updatePost(postId, Page.AUDIO, newAudio, file);
-      setAlert("Post updated!");
-    } else {
-      const postId = await createPost(Page.AUDIO, newAudio, file);
-      setAlert("Post successful!");
-      router.push(`/${Page.AUDIO}/${postId}`);
-    }
+    handleSubmitPost(newAudio, postId, file);
   };
 
   const handleCancel = () =>
@@ -118,6 +101,23 @@ const AudioForm: React.FC<AudioFormProps> = ({ postId, audio }) => {
           </Button>
         </Box>
       </form>
+      {isSubmitting && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: "100%",
+            width: "100%",
+            bgcolor: "black",
+            opacity: "70%",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <CircularProgress color="secondary" />
+        </Box>
+      )}
     </Box>
   );
 };

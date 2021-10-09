@@ -6,14 +6,14 @@ import React from "react";
 import ArticleContent from "../../../components/content/ArticleContent";
 import AudioContent from "../../../components/content/AudioContent";
 import StoryContent from "../../../components/content/StoryContent";
-import { useGetOneDoc } from "../../../lib/hooks/useGetOneDoc";
+import { useDoc } from "../../../lib/dataContext";
 import { Article, Audio, Page, Story } from "../../../lib/types";
 
 const IndividualPage: NextPage = ({}) => {
   const router = useRouter();
   const page = router.query.page as Page;
   const postId = router.query.id as string;
-  const { loading, post } = useGetOneDoc(page, postId);
+  const { post, loading } = useDoc(page, postId);
 
   if (!Object.values(Page).includes(page)) {
     return <ErrorPage statusCode={404} />;
@@ -35,7 +35,7 @@ const IndividualPage: NextPage = ({}) => {
       <Head>
         <title>{post ? post.title : "Not found"}</title>
       </Head>
-      {post ? content : !loading && <h1>Not found</h1>}
+      {loading ? <h1>Loading...</h1> : post ? content : <h1>Not found</h1>}
     </>
   );
 };
