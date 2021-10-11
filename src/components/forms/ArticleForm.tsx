@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useHandleSubmitPost } from "../../lib/hooks/useHandleSubmitPost";
 import { Article, Page } from "../../lib/types";
 import FileInput from "./input/FileInput";
-import TextArea from "./input/TextArea";
+import RichText from "./input/RichText";
 import TextInput from "./input/TextInput";
 
 type AllOrNone<T> = T | { [K in keyof T]?: never };
@@ -91,7 +91,7 @@ const ArticleForm: React.FC<ArticleFormProps> = ({ postId, article }) => {
           value={duration}
           setValue={setDuration}
         />
-        <TextArea name="html" label="Body" value={html} setValue={setHtml} />
+        <RichText name="html" label="Body" value={html} setValue={setHtml} />
         <FileInput
           label="Image"
           handleFileChange={handleFileChange}

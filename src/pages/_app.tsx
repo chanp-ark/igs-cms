@@ -1,6 +1,5 @@
 import type { AppProps } from "next/app";
 import { useRouter } from "next/dist/client/router";
-import React from "react";
 import ConditionalWrap from "../components/ConditionalWrap";
 import Navbar from "../components/Navbar";
 import PageLayout from "../components/PageLayout";

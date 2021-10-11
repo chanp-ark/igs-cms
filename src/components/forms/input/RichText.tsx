@@ -4,7 +4,7 @@ import { TextInputProps } from "./TextInput";
 import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
 
-const TextArea: React.FC<TextInputProps> = ({
+const RichText: React.FC<TextInputProps> = ({
   name,
   label,
   value,
@@ -16,6 +16,7 @@ const TextArea: React.FC<TextInputProps> = ({
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
       [{ list: 'ordered'}, { list: 'bullet' }],
+      ['image', 'video'],
     ],
   };
 
@@ -36,14 +37,6 @@ const TextArea: React.FC<TextInputProps> = ({
       <InputLabel shrink={false} htmlFor={name}>
         {label}
       </InputLabel>
-      {/* <TextareaAutosize
-        aria-label="body"
-        style={{ width: "60%", marginLeft: "15rem" }}
-        minRows={5}
-        name={name}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      /> */}
       <div style={{ width: 500, height: 200, marginBottom: '5rem' }}>
         <div ref={quillRef} />
       </div>
@@ -51,4 +44,4 @@ const TextArea: React.FC<TextInputProps> = ({
   );
 };
 
-export default TextArea;
+export default RichText;
